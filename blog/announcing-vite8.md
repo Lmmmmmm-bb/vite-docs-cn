@@ -42,7 +42,7 @@ Vite 现在每周被下载 6500 万次，生态系统继续随着每个版本的
 - [迁移指南](/guide/migration)
 - [GitHub 变更日志](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 
-在线使用 Vite 8 使用 [vite.new](https://vite.new) 或使用你喜欢的框架运行 `pnpm create vite` 搭建一个 Vite 应用。更多详情请参见 [入门指南](/guide/)。
+可通过 [vite.new](https://vite.new) 在线体验 Vite 8 或使用你喜欢的框架运行 `pnpm create vite` 搭建一个 Vite 应用。更多详情请参见 [入门指南](/guide/)。
 
 我们邀请你帮助我们改进 Vite（加入超过 [1.2K 贡献者到 Vite Core](https://github.com/vitejs/vite/graphs/contributors)），我们的依赖，或插件和生态系统中的项目。更多详情请参见我们的 [贡献指南](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md)。一个很好的开始方式是 [分类问题](https://github.com/vitejs/vite/issues)，[审查 PR](https://github.com/vitejs/vite/pulls)，基于开放问题发送测试 PR，并在 [Discussions](https://github.com/vitejs/vite/discussions) 或 Vite Land 的 [帮助论坛](https://discord.com/channels/804011606160703521/1019670660856942652) 中支持其他人。如果你有任何问题，加入我们的 [Discord 社区](https://chat.vite.dev) 并在 [#contributing 频道](https://discord.com/channels/804011606160703521/804439875226173480) 与我们交谈。
 

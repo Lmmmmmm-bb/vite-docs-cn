@@ -37,8 +37,8 @@ Vite 现在每周被下载 6500 万次，生态系统继续随着每个版本的
 
 快速链接：
 
-- [文档](/)
-- 翻译版本：[简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Español](https://es.vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/), [فارسی](https://fa.vite.dev/)
+- [英文文档](https://vite.dev)
+- 翻译版本：[简体中文](/)、[日本語](https://ja.vite.dev/)、[Español](https://es.vite.dev/)、[Português](https://pt.vite.dev/)、[한국어](https://ko.vite.dev/)、[Deutsch](https://de.vite.dev/)、[فارسی](https://fa.vite.dev/)
 - [迁移指南](/guide/migration)
 - [GitHub 变更日志](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 

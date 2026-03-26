@@ -20,7 +20,7 @@
 		"lodash": "^4.17.23",
 		"markdown-it-image-size": "^15.0.1",
 		"vite": "^7.3.1",
-		"vitepress": "2.0.0-alpha.16",
+		"vitepress": "2.0.0-alpha.17",
 		"vitepress-plugin-group-icons": "^1.7.1",
 		"vue": "^3.5.27",
 		"vue-tsc": "^3.2.4",

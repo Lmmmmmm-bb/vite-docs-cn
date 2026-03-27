@@ -130,7 +130,7 @@ const config = defineConfig({
     ],
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
         translations: {
           button: {

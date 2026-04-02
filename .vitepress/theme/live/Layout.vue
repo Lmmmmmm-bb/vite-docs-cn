@@ -24,9 +24,9 @@ const startTime = '2026-03-19T15:00:00.000Z'
     </template>
   </TimeoutSwitcher>
   <Footer
-    heading="Start building with Vite"
-    subheading="Prepare for a development environment that can finally keep pace with the speed of your mind."
-    button-text="Get Started"
+    heading="使用 Vite 开始构建"
+    subheading="准备好迎接一个能跟上你思维速度的开发环境"
+    button-text="快速开始"
     button-link="/guide/"
   />
 </template>

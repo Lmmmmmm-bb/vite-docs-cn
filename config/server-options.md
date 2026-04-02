@@ -226,16 +226,16 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 
 ## server.forwardConsole
 
-- **Type:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
-- **Default:** auto (`true` when an AI coding agent is detected based on [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent), otherwise `false`)
+- **类型：** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
+- **默认：** 自动（当基于 [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent) 检测到 AI 编码代理时为 `true`，否则为 `false`）
 
-Forward browser runtime events to the Vite server console during development.
+在开发期间，将浏览器运行时事件转发到 Vite 服务器控制台。
 
-- `true` enables forwarding unhandled errors and `console.error` / `console.warn` logs.
-- `unhandledErrors` controls forwarding uncaught exceptions and unhandled promise rejections.
-- `logLevels` controls which `console.*` calls are forwarded.
+- `true` 启用转发未处理的错误以及 `console.error` / `console.warn` 日志。
+- `unhandledErrors` 控制是否转发未捕获的异常和未处理的 Promise 拒绝。
+- `logLevels` 控制转发哪些 `console.*` 调用。
 
-For example:
+示例：
 
 ```js
 export default defineConfig({
@@ -248,7 +248,7 @@ export default defineConfig({
 })
 ```
 
-When unhandled errors are forwarded, they are logged in the server terminal with enhanced formatting, for example:
+当未处理的错误被转发时，它们将以增强格式记录在服务器终端中，例如：
 
 ```log
 1:18:38 AM [vite] (client) [Unhandled error] Error: this is test error

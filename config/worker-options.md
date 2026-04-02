@@ -13,23 +13,14 @@ worker 打包时的输出类型。
 
 - **类型：** [`() => (Plugin | Plugin[])[]`](./shared-options#plugins)
 
-<<<<<<< HEAD
 应用于 worker 打包的 Vite 插件。注意 [config.plugins](./shared-options#plugins) 仅会在开发（dev）阶段应用于 worker，若要配置在构建（build）阶段应用于 worker 的插件则应该在本选项这里配置。
 该函数应返回新的插件实例，因为它们在并行的 rolldown worker 构建中使用。因此，在 `config` 钩子中修改 `config.worker` 选项将被忽略。
-=======
-Vite plugins that apply to the worker bundles. Note that [config.plugins](./shared-options#plugins) only applies to workers in dev, it should be configured here instead for build.
-The function should return new plugin instances as they are used in parallel rolldown worker builds. As such, modifying `config.worker` options in the `config` hook will be ignored.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
 
 ## worker.rolldownOptions
 
 - **类型：** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-<<<<<<< HEAD
 用于打包 worker 的 Rolldown 配置项。
-=======
-Rolldown options to build worker bundle.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
 
 ## worker.rollupOptions
 

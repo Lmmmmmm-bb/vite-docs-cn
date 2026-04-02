@@ -6,15 +6,15 @@
       class="flex flex-col items-center text-center md:text-left md:items-start p-10 gap-5 justify-center"
     >
       <h1 class="text-white text-pretty max-w-[35rem]">
-        5th anniversary of the Vite Team Creation
+        Vite 团队成立五周年
       </h1>
       <p class="text-white text-3xl text-pretty max-w-[35rem]">
-        Vite: The Documentary re-premiere
+        Vite：纪录片重映
       </p>
       <p class="text-white/70 md:text-lg max-w-[35rem] text-pretty">
-        Join the ecosystem this March 19th at 3 PM UTC to remember the story we
-        wrote together. And participate in the live stage to discuss our past,
-        present, and future. We'll be waiting for you!
+        3 月 19 日 UTC 时间下午 3 点，与整个生态一起回顾我们共同书写的故事
+        参与直播互动，共同探讨我们的过去、现在与未来
+        我们在等你！
       </p>
       <div class="flex items-start justify-between w-full gap-5 mt-8">
         <div class="flex items-center gap-5">
@@ -24,7 +24,7 @@
             rel="noopener noreferrer"
             class="button button--primary inline-block w-fit"
           >
-            Add to Calendar
+            添加到日历
           </a>
           <a
             href="https://chat.vite.dev"
@@ -32,7 +32,7 @@
             rel="noopener noreferrer"
             class="button inline-block w-fit"
           >
-            Join Community
+            加入社区
           </a>
         </div>
         <a

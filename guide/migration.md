@@ -19,11 +19,7 @@ Vite 8 使用基于 [Rolldown](https://rolldown.rs/) 和 [Oxc](https://oxc.rs/) 
 
 ### 渐进式迁移 {#gradual-migration}
 
-<<<<<<< HEAD
 `rolldown-vite` 包实现了使用 Rolldown 的 Vite 7，但不包含其他 Vite 8 的变更。这可以作为迁移到 Vite 8 的中间步骤。请参阅 Vite 7 文档中的 [Rolldown 集成指南](https://v7.vite.dev/guide/rolldown) 了解如何从 Vite 7 切换到 `rolldown-vite`。
-=======
-The `rolldown-vite` package implements Vite 7 with Rolldown, without other Vite 8 changes. This can be used as an intermediate step to migrate to Vite 8. See [the Rolldown Integration guide](https://v7.vite.dev/guide/rolldown) in the Vite 7 docs to switch to `rolldown-vite` from Vite 7.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
 
 对于从 `rolldown-vite` 迁移到 Vite 8 的用户，你可以撤销 `package.json` 中的依赖变更并更新到 Vite 8：
 
@@ -104,20 +100,7 @@ const plugin = {
 
 :::: details 降低原生装饰器的解决方法
 
-<<<<<<< HEAD
-目前你可以使用 [Babel](https://babeljs.io/) 或 [SWC](https://swc.rs/) 来降低原生装饰器。虽然 SWC 比 Babel 更快，但它**不支持 esbuild 支持的最新装饰器规范**。
-
-自从装饰器规范达到第 3 阶段以来，已经更新了多次。每个工具支持的版本如下：
-
-- `"2023-11"`（esbuild、TypeScript 5.4+ 和 Babel 支持此版本）
-- `"2023-05"`（TypeScript 5.2+ 支持此版本）
-- `"2023-01"`（TypeScript 5.0+ 支持此版本）
-- `"2022-03"`（SWC 支持此版本）
-
-请参阅 [Babel 装饰器版本指南](https://babeljs.io/docs/babel-plugin-proposal-decorators#version) 了解各版本之间的差异。
-=======
-You can use [Babel](https://babeljs.io/) or [SWC](https://swc.rs/) to lower native decorators for the time being.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+目前你可以使用 [Babel](https://babeljs.io/) 或 [SWC](https://swc.rs/) 来临时降低原生装饰器。
 
 **使用 Babel:**
 
@@ -303,24 +286,17 @@ export default defineConfig({
 
 ### 移除了 `build.rollupOptions.watch.chokidar` 选项 {#removed-build-rollupoptions-watch-chokidar-option}
 
-<<<<<<< HEAD
-`build.rollupOptions.watch.chokidar` 选项已被移除。请迁移到 [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify) 选项。
-=======
-The `build.rollupOptions.watch.chokidar` option was removed. Please migrate to the [`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher) option.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+`build.rollupOptions.watch.chokidar` 选项已被移除。请迁移到 [`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher) 选项。
 
 ### 从 `build.rollupOptions.output.manualChunks` 中移除对象形式，并弃用函数形式  {#remove-object-form-build-rollupoptions-output-manualchunks-and-deprecate-function-form-one}
 
 `output.manualChunks` 选项的对象形式不再支持。`output.manualChunks` 的函数形式已弃用。Rolldown 提供了更灵活的 [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) 选项。有关 `codeSplitting` 的更多详细信息，请参阅 Rolldown 的文档：[手动代码分割 - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
 
-<<<<<<< HEAD
-### 模块类型支持和自动检测 {#module-type-support-and-auto-detection}
-=======
-### `build()` Throws `BundleError`
+### `build()` 抛出 `BundleError` {#build-throws-bundleerror}
 
-_This change only affects JS API users._
+_此更改仅影响 JS API 用户。_
 
-`build()` now throws a [`BundleError`](https://rolldown.rs/reference/TypeAlias.BundleError) instead of the raw error thrown in the plugin. `BundleError` is typed as `Error & { errors?: RolldownError[] }` and it wraps the individual errors in an `errors` array. If you need the individual errors, you need to access `.errors`:
+`build()` 现在抛出 [`BundleError`](https://rolldown.rs/reference/TypeAlias.BundleError) 而不是插件中抛出的原始错误。`BundleError` 的类型为 `Error & { errors?: RolldownError[] }`，它将各个单独的错误包装在 `errors` 数组中。如果你需要访问各单独的错误，需要通过 `.errors` 进行访问：
 
 ```js
 try {
@@ -328,14 +304,13 @@ try {
 } catch (e) {
   if (e.errors) {
     for (const error of e.errors) {
-      console.log(error.code) // error code
+      console.log(error.code) // 错误代码
     }
   }
 }
 ```
 
-### Module Type Support and Auto Detection
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+### 模块类型支持和自动检测 {#module-type-support-and-auto-detection}
 
 _此更改仅影响插件作者。_
 
@@ -374,7 +349,6 @@ const plugin = {
 
 还有其他一些只影响少数用户的破坏性更改。
 
-<<<<<<< HEAD
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) 尚未得到支持 ([rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365))
 - **TypeScript 旧版命名空间仅部分支持**：TypeScript 的旧版命名空间功能现在只得到部分支持。更多详情请参阅 [Oxc 转换器的相关文档](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support)。
 - `define` 不共享对象引用：当你传递一个对象作为 `define` 的值时，每个变量都会有一个单独的对象副本。详见 [Oxc 转换器的相关文档](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define)。
@@ -394,28 +368,6 @@ const plugin = {
   - `renderDynamicImport` 钩子 ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - `resolveFileUrl` 钩子
 - `parseAst` / `parseAstAsync` 函数现在已被弃用，推荐使用功能更多的 `parseSync` / `parse` 函数。
-- （bug）`@vite-ignore` 注释的边界情况 ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
-=======
-- [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) are not supported yet ([rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365))
-- TypeScript legacy namespace is only supported partially. See [Oxc Transformer's related documentation](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support) for more details.
-- `define` does not share reference for objects: When you pass an object as a value to `define`, each variable will have a separate copy of the object. See [Oxc Transformer's related documentation](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) for more details.
-- `bundle` object changes (`bundle` is an object passed in `generateBundle` / `writeBundle` hooks, returned by `build` function):
-  - Assigning to `bundle[foo]` is not supported. This is discouraged by Rollup as well. Please use `this.emitFile()` instead.
-  - the reference is not shared across the hooks ([rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410))
-  - `structuredClone(bundle)` errors with `DataCloneError: #<Object> could not be cloned`. This is not supported anymore. Please clone it with `structuredClone({ ...bundle })`. ([rolldown-vite#128](https://github.com/vitejs/rolldown-vite/issues/128))
-- All parallel hooks in Rollup works as sequential hooks. See [Rolldown's documentation](https://rolldown.rs/apis/plugin-api#sequential-hook-execution) for more details.
-- `"use strict";` is not injected sometimes. See [Rolldown's documentation](https://rolldown.rs/in-depth/directives) for more details.
-- Transforming to ES5 and below with plugin-legacy is not supported ([rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452))
-- Passing the same browser with multiple versions of it to `build.target` option now errors: esbuild selects the latest version of it, which was probably not what you intended.
-- Missing support by Rolldown: The following features are not supported by Rolldown and is no longer supported by Vite.
-  - `build.rollupOptions.output.format: 'system'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2387))
-  - `build.rollupOptions.output.format: 'amd'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2528))
-  - `shouldTransformCachedModule` hook ([rolldown#4389](https://github.com/rolldown/rolldown/issues/4389))
-  - `resolveImportMeta` hook ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
-  - `renderDynamicImport` hook ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
-  - `resolveFileUrl` hook
-- `parseAst` / `parseAstAsync` functions are now deprecated in favor of `parseSync` / `parse` functions which have more features.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
 
 ## 从 v6 迁移 {#migration-from-v6}
 

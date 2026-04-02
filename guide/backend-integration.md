@@ -104,10 +104,7 @@
    }
    ```
 
-<<<<<<< HEAD
-   manifest 具有 `Record<name, chunk>` 结构，其中每个块遵循 `ManifestChunk` 接口：
-=======
-   The manifest maps source files to their build outputs and dependencies:
+   manifest 描述了源文件到其构建输出及依赖关系的映射：
 
    ```dot
    digraph manifest {
@@ -132,8 +129,7 @@
    }
    ```
 
-   The manifest has a `Record<name, chunk>` structure where each chunk follows the `ManifestChunk` interface:
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+   manifest 具有 `Record<name, chunk>` 结构，其中每个块遵循 `ManifestChunk` 接口：
 
    ```ts style:max-height:400px
    interface ManifestChunk {

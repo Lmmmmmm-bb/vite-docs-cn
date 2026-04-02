@@ -100,60 +100,54 @@ const plugin = {
 
 :::: details 降低原生装饰器的解决方法
 
-目前你可以使用 [Babel](https://babeljs.io/) 或 [SWC](https://swc.rs/) 来降低原生装饰器。虽然 SWC 比 Babel 更快，但它**不支持 esbuild 支持的最新装饰器规范**。
-
-自从装饰器规范达到第 3 阶段以来，已经更新了多次。每个工具支持的版本如下：
-
-- `"2023-11"`（esbuild、TypeScript 5.4+ 和 Babel 支持此版本）
-- `"2023-05"`（TypeScript 5.2+ 支持此版本）
-- `"2023-01"`（TypeScript 5.0+ 支持此版本）
-- `"2022-03"`（SWC 支持此版本）
-
-请参阅 [Babel 装饰器版本指南](https://babeljs.io/docs/babel-plugin-proposal-decorators#version) 了解各版本之间的差异。
+目前你可以使用 [Babel](https://babeljs.io/) 或 [SWC](https://swc.rs/) 来临时降低原生装饰器。
 
 **使用 Babel:**
 
 ::: code-group
 
 ```bash [npm]
-$ npm install -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ npm install -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Yarn]
-$ yarn add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ yarn add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [pnpm]
-$ pnpm add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ pnpm add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Bun]
-$ bun add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ bun add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Deno]
-$ deno add -D npm:@rollup/plugin-babel npm:@babel/plugin-proposal-decorators
+$ deno add -D npm:@rolldown/plugin-babel npm:@babel/plugin-proposal-decorators
 ```
 
 :::
 
 ```ts [vite.config.ts]
-import { defineConfig, withFilter } from 'vite'
-import { babel } from '@rollup/plugin-babel'
+import { defineConfig } from 'vite'
+import babel from '@rolldown/plugin-babel'
+
+function decoratorPreset(options: Record<string, unknown>) {
+  return {
+    preset: () => ({
+      plugins: [['@babel/plugin-proposal-decorators', options]],
+    }),
+    rolldown: {
+      // Only run this transform if the file contains a decorator.
+      filter: {
+        code: '@',
+      },
+    },
+  }
+}
 
 export default defineConfig({
-  plugins: [
-    withFilter(
-      babel({
-        configFile: false,
-        plugins: [
-          ['@babel/plugin-proposal-decorators', { version: '2023-11' }],
-        ],
-      }),
-      // Only run this transform if the file contains a decorator.
-      { transform: { code: '@' } },
-    ),
-  ],
+  plugins: [babel({ presets: [decoratorPreset({ version: '2023-11' })] })],
 })
 ```
 
@@ -194,8 +188,7 @@ export default defineConfig({
         swc: {
           jsc: {
             parser: { decorators: true, decoratorsBeforeExport: true },
-            // NOTE: SWC doesn't support the '2023-11' version yet.
-            transform: { decoratorVersion: '2022-03' },
+            transform: { decoratorVersion: '2023-11' },
           },
         },
       }),
@@ -293,11 +286,29 @@ export default defineConfig({
 
 ### 移除了 `build.rollupOptions.watch.chokidar` 选项 {#removed-build-rollupoptions-watch-chokidar-option}
 
-`build.rollupOptions.watch.chokidar` 选项已被移除。请迁移到 [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify) 选项。
+`build.rollupOptions.watch.chokidar` 选项已被移除。请迁移到 [`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher) 选项。
 
 ### 从 `build.rollupOptions.output.manualChunks` 中移除对象形式，并弃用函数形式  {#remove-object-form-build-rollupoptions-output-manualchunks-and-deprecate-function-form-one}
 
 `output.manualChunks` 选项的对象形式不再支持。`output.manualChunks` 的函数形式已弃用。Rolldown 提供了更灵活的 [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) 选项。有关 `codeSplitting` 的更多详细信息，请参阅 Rolldown 的文档：[手动代码分割 - Rolldown](https://rolldown.rs/in-depth/advanced-chunks)。
+
+### `build()` 抛出 `BundleError` {#build-throws-bundleerror}
+
+_此更改仅影响 JS API 用户。_
+
+`build()` 现在抛出 [`BundleError`](https://rolldown.rs/reference/TypeAlias.BundleError) 而不是插件中抛出的原始错误。`BundleError` 的类型为 `Error & { errors?: RolldownError[] }`，它将各个单独的错误包装在 `errors` 数组中。如果你需要访问各单独的错误，需要通过 `.errors` 进行访问：
+
+```js
+try {
+  await build()
+} catch (e) {
+  if (e.errors) {
+    for (const error of e.errors) {
+      console.log(error.code) // 错误代码
+    }
+  }
+}
+```
 
 ### 模块类型支持和自动检测 {#module-type-support-and-auto-detection}
 
@@ -357,7 +368,6 @@ const plugin = {
   - `renderDynamicImport` 钩子 ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - `resolveFileUrl` 钩子
 - `parseAst` / `parseAstAsync` 函数现在已被弃用，推荐使用功能更多的 `parseSync` / `parse` 函数。
-- （bug）`@vite-ignore` 注释的边界情况 ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
 
 ## 从 v6 迁移 {#migration-from-v6}
 

@@ -89,13 +89,16 @@ export default function myPlugin() {
   return {
     name: 'transform-file',
 
-    transform(src, id) {
-      if (fileRegex.test(id)) {
+    transform: {
+      filter: {
+        id: fileRegex,
+      },
+      handler(src, id) {
         return {
           code: compileFileToJS(src),
           map: null // 如果可行将提供 source map
         }
-      }
+      },
     },
   }
 }
@@ -110,21 +113,25 @@ export default function myPlugin() {
 虚拟模块是一种很实用的模式，使你可以对使用 ESM 语法的源文件传入一些编译时信息。
 
 ```js
+import { exactRegex } from '@rolldown/pluginutils'
+
 export default function myPlugin() {
   const virtualModuleId = 'virtual:my-module'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
     name: 'my-plugin', // 必须的，将会在 warning 和 error 中显示
-    resolveId(id) {
-      if (id === virtualModuleId) {
+    resolveId: {
+      filter: { id: exactRegex(virtualModuleId) },
+      handler() {
         return resolvedVirtualModuleId
-      }
+      },
     },
-    load(id) {
-      if (id === resolvedVirtualModuleId) {
+    load: {
+      filter: { id: exactRegex(resolvedVirtualModuleId) },
+      handler() {
         return `export const msg = "from virtual module"`
-      }
+      },
     },
   }
 }
@@ -470,7 +477,34 @@ Vite 插件也可以提供钩子来服务于特定的 Vite 目标。这些钩子
     }
     ```
 
-## Output Bundle Metadata {#output-bundle-metadata}
+## 插件上下文 Meta {#plugin-context-meta}
+
+对于可以访问插件上下文的插件钩子，Vite 会在 `this.meta` 上暴露额外的属性：
+
+- `this.meta.viteVersion`：当前 Vite 版本字符串（例如 `"8.0.0"`）。
+
+::: tip 检测基于 Rolldown 的 Vite
+
+[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) 仅在基于 Rolldown 的 Vite（即 Vite 8+）中可用。你可以用它来检测当前 Vite 实例是否由 Rolldown 驱动：
+
+```ts
+function versionCheckPlugin(): Plugin {
+  return {
+    name: 'version-check',
+    buildStart() {
+      if (this.meta.rolldownVersion) {
+        // 仅在基于 Rolldown 的 Vite 上运行时才执行某些操作
+      } else {
+        // 在基于 Rollup 的 Vite 上运行时执行其他操作
+      }
+    },
+  }
+}
+```
+
+:::
+
+## 构建输出元数据 {#output-bundle-metadata}
 
 在构建过程中，Vite 会向 Rolldown 的构建输出对象添加一个 Vite 特有的 `viteMetadata` 字段。
 

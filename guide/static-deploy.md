@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# 部署静态站点 {#deploying-a-static-site}
-=======
 <!--
   READ THIS IF YOU WANT TO ADD A NEW DEPLOYMENT PLATFORM.
 
@@ -19,8 +16,7 @@
   If a section is removed, we will ping the original PR authors before doing so.
 -->
 
-# Deploying a Static Site
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+# 部署静态站点 {#deploying-a-static-site}
 
 本指南建立在以下几个假设基础之上：
 

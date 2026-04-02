@@ -74,36 +74,32 @@
 或者，如果服务器在 VS Code devcontainer 中运行，请求可能会出现停滞。要修复此问题，请参阅
 [Dev Containers / VS Code Port Forwarding](#dev-containers-vs-code-port-forwarding)。
 
-<<<<<<< HEAD
-### 网络请求停止加载 {#network-requests-stop-loading}
-=======
-### Vite crashes with ENOSPC error
+### Vite 因 ENOSPC 错误崩溃 {#vite-crashes-with-enospc-error}
 
-If you see an error like this on Linux:
+如果你在 Linux 上看到如下错误：
 
 > Error: ENOSPC: System limit for number of file watchers reached
 
-This happens when you have too many files in your project directory (e.g., many images or assets) and exceed the system's file watcher limit. Linux has a default limit of around 8,192-10,000 file watchers.
+这是因为你的项目目录中文件过多（例如有大量图片或资源文件），超出了系统文件监听器的限制。Linux 默认的文件监听器数量上限约为 8,192 到 10,000。
 
-To solve this, you can:
+要解决此问题，你可以：
 
-- Increase the system file watcher limit:
+- 提高系统文件监听器的数量上限：
 
   ```shell
-  # Check current limit
+  # 查看当前限制值
   $ cat /proc/sys/fs/inotify/max_user_watches
-  # Increase limit (temporary)
+  # 临时增加限制值
   $ sudo sysctl fs.inotify.max_user_watches=524288
-  # Make it permanent - add to /etc/sysctl.conf (or edit if it already exists)
+  # 永久生效 —— 添加到 /etc/sysctl.conf（若已存在则编辑该条目）
   $ echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
   $ sudo sysctl -p
   ```
 
-- Exclude directories with many files from file watching using [`server.watch.ignored`](/config/server-options#server-watch)
-- Use polling instead of file system events with [`server.watch.usePolling`](/config/server-options#server-watch). Note that polling uses more CPU resources
+- 通过 [`server.watch.ignored`](/config/server-options#server-watch) 将包含大量文件的目录排除在文件监听范围之外
+- 通过 [`server.watch.usePolling`](/config/server-options#server-watch) 使用轮询代替文件系统事件监听。请注意，轮询会消耗更多 CPU 资源
 
-### Network requests stop loading
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+### 网络请求停止加载 {#network-requests-stop-loading}
 
 使用自签名SSL证书时，Chrome 会忽略所有缓存指令并重新加载内容。而 Vite 依赖于这些缓存指令。
 

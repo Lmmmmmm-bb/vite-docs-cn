@@ -74,6 +74,31 @@
 或者，如果服务器在 VS Code devcontainer 中运行，请求可能会出现停滞。要修复此问题，请参阅
 [Dev Containers / VS Code Port Forwarding](#dev-containers-vs-code-port-forwarding)。
 
+### Vite 因 ENOSPC 错误崩溃 {#vite-crashes-with-enospc-error}
+
+如果你在 Linux 上看到如下错误：
+
+> Error: ENOSPC: System limit for number of file watchers reached
+
+这是因为你的项目目录中文件过多（例如有大量图片或资源文件），超出了系统文件监听器的限制。Linux 默认的文件监听器数量上限约为 8,192 到 10,000。
+
+要解决此问题，你可以：
+
+- 提高系统文件监听器的数量上限：
+
+  ```shell
+  # 查看当前限制值
+  $ cat /proc/sys/fs/inotify/max_user_watches
+  # 临时增加限制值
+  $ sudo sysctl fs.inotify.max_user_watches=524288
+  # 永久生效 —— 添加到 /etc/sysctl.conf（若已存在则编辑该条目）
+  $ echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+  $ sudo sysctl -p
+  ```
+
+- 通过 [`server.watch.ignored`](/config/server-options#server-watch) 将包含大量文件的目录排除在文件监听范围之外
+- 通过 [`server.watch.usePolling`](/config/server-options#server-watch) 使用轮询代替文件系统事件监听。请注意，轮询会消耗更多 CPU 资源
+
 ### 网络请求停止加载 {#network-requests-stop-loading}
 
 使用自签名SSL证书时，Chrome 会忽略所有缓存指令并重新加载内容。而 Vite 依赖于这些缓存指令。

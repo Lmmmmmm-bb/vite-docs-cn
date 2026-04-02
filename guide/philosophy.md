@@ -2,7 +2,7 @@
 
 ## 精简且可扩展的核心 {#lean-extendable-core}
 
-Vite 的目标不在于满足所有用户的每一个使用场景。Vite 旨在开箱即用地支持构建 Web 应用的最常见的模式，但 [Vite 核心包](https://github.com/vitejs/vite) 必须保持精简并拥有较小的 API 接口，以保证项目长期维护的可行性。这一目标之所以可能实现，得益于 [Vite 基于 Rollup 的插件系统](./api-plugin.md) 。可以作为外部插件实现的功能通常不会添加到 Vite 核心中。 [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) 是一个很好的示例，展示了 Vite 核心之外能实现的强大功能，并且有许多 [维护良好的插件](https://github.com/vitejs/awesome-vite#plugins) 来满足您的需求。Vite 与 Rollup 项目紧密合作，确保插件在尽可能多的情况下既可用于纯 Rollup 项目，也可用于 Vite 项目，并努力将必要的扩展推送到上游 Plugin API 中。
+Vite 旨在开箱即用地支持构建 Web 应用的最常见模式，同时保持 [Vite 核心包](https://github.com/vitejs/vite) 精简，并能够长期维护。我们相信，支持多样化使用场景的最佳方式，是提供强大的基础原语和 API，让插件基于此构建；因此我们也在积极拓展核心功能，使 Vite 具备更强的可扩展性。[Vite 的插件系统](./api-plugin.md) 基于 Rollup 插件 API 的超集，使得 [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) 等插件以及众多 [维护良好的插件](https://registry.vite.dev/plugins) 都能满足你的各种需求。Vite 的打包工具 [Rolldown](https://rolldown.rs/) 保持了与 Rollup 插件接口的兼容性，因此插件通常可以同时用于 Vite 和原生 Rollup 项目。
 
 ## 推动现代 Web 开发 {#pushing-the-modern-web}
 
@@ -16,7 +16,7 @@ Vite 提供了一系列推动编写现代代码的特定功能。例如：
 
 ## 旨在高性能的实用解决方案 {#a-pragmatic-approach-to-performance}
 
-Vite 自其诞生之初（详见：[为什么选 Vite](./why.md)）就一直致力于性能优化。其开发服务器架构设计确保了随着项目规模扩大，模块热替换（HMR）仍能保持高速运行。Vite 基于 [Oxc toolchain](https://oxc.rs/) 和 [Rolldown](https://rolldown.rs/) 这样的原生工具处理复杂的任务，同时将其他部分代码保留在 JavaScript 中，以实现速度与灵活性之间的平衡。在需要时，框架插件会利用 [Babel](https://babeljs.io/) 来编译用户代码。得益于 Rolldown 对 Rollup 插件的兼容性，Vite 能够访问广泛的插件生态系统。
+自 [诞生之初](./why.md) 起，Vite 就始终专注于性能优化。其开发服务器架构确保了随着项目规模增长，HMR 仍能保持高速。Vite 基于原生工具构建，包括 [Oxc toolchain](https://oxc.rs/) 和 [Rolldown](https://rolldown.rs/)，用于处理计算密集型任务，同时将其余代码保留在 JS 中，以兼顾速度与灵活性。在需要时，框架插件会借助 [Babel](https://babeljs.io/) 来编译用户代码。得益于 Rolldown 对 Rollup 插件的兼容性，Vite 能够访问广泛的插件生态系统。
 
 ## 基于 Vite 构建框架 {#building-frameworks-on-top-of-vite}
 

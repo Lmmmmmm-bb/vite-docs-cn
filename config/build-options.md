@@ -130,7 +130,7 @@ Git LFS 占位符会自动排除在内联之外，因为它们不包含其所表
 ## build.cssMinify {#build-cssminify}
 
 - **类型：** `boolean | 'lightningcss' | 'esbuild'`
-- **默认：** 对于客户端，与 [`build.minify`](#build-minify) 相同；对于 SSR，为 `'lightningcss'`
+- **默认：** `'lightningcss'`，但如果客户端构建时禁用了 [`build.minify`](#build-minify)，则为 `false`
 
 此选项允许用户覆盖 CSS 最小化压缩的配置，而不是使用默认的 `build.minify`，这样你就可以单独配置 JS 和 CSS 的最小压缩方式。Vite 默认使用 [Lightning CSS](https://lightningcss.dev/minification.html) 来压缩 CSS。可以通过 [`css.lightningcss`](./shared-options.md#css-lightningcss) 进行配置。将此选项设置为 `'esbuild'` 可以改用 esbuild 进行压缩。
 
@@ -251,7 +251,7 @@ export default defineConfig({
 
 当值为字符串时，将用作相对于 `build.outDir` 的 manifest 文件路径。设置为 `true` 时，路径将是 `.vite/manifest.json`。
 
-如果您正在编写插件，并且需要在构建过程中检查每个输出块或资源的 CSS 和静态资源，您也可以使用 [`viteMetadata` output bundle metadata API](/guide/api-plugin#output-bundle-metadata).
+如果您正在编写插件，并且需要在构建过程中检查每个输出块或资源的 CSS 和静态资源，您也可以使用 [`viteMetadata` 构建输出元数据 API](/guide/api-plugin#output-bundle-metadata).
 
 ## build.ssrManifest {#build-ssrmanifest}
 

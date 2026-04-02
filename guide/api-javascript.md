@@ -383,7 +383,7 @@ function normalizePath(id: string): string
 
 ## `transformWithOxc`
 
-**Type Signature:**
+**类型签名：**
 
 ```ts
 async function transformWithOxc(
@@ -458,32 +458,28 @@ interface PreprocessCSSResult {
 
 使用哪个预处理器是根据 `filename` 的扩展名来推断的。如果 `filename` 以 `.module.{ext}` 结尾，那么它就会被推断为 [CSS module](https://github.com/css-modules/css-modules)，返回的结果会包含一个 `modules` 对象，这个对象将原始的类名映射到转换后的类名。
 
-<<<<<<< HEAD
 需要注意的是，预处理不会解析 `url()` 或 `image-set()` 中的 URL。
-=======
-Note that pre-processing will not resolve URLs in `url()` or `image-set()`.
 
 ## `version`
 
-**Type:** `string`
+**类型：** `string`
 
-The current version of Vite as a string (e.g. `"8.0.0"`).
+Vite 当前版本号字符串（例如 `"8.0.0"`）。
 
 ## `rolldownVersion`
 
-**Type:** `string`
+**类型：** `string`
 
-The version of Rolldown used by Vite as a string (e.g. `"1.0.0"`). A re-export of [`VERSION`](https://rolldown.rs/reference/Variable.VERSION) from `rolldown`.
+Vite 所使用的 Rolldown 版本号字符串（例如 `"1.0.0"`）。从 `rolldown` 重新导出的 [`VERSION`](https://rolldown.rs/reference/Variable.VERSION)。
 
 ## `esbuildVersion`
 
-**Type:** `string`
+**类型：** `string`
 
-Only kept for backward compatibility.
+仅为向后兼容而保留。
 
 ## `rollupVersion`
 
-**Type:** `string`
+**类型：** `string`
 
-Only kept for backward compatibility.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+仅为向后兼容而保留。

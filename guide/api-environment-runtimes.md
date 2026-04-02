@@ -82,9 +82,6 @@ Vite 开发服务器默认暴露两个环境：一个 `client` 环境和一个 `
 
 Vite 模块运行器允许首先使用 Vite 插件处理代码来运行任何代码。它不同于 `server.ssrLoadModule`，因为运行器实现与服务器解耦。这允许库和框架作者实现 Vite 服务器与运行器之间的通信层。浏览器通过服务器 WebSocket 和 HTTP 请求与其对应的环境通信。Node 模块运行器可以直接通过函数调用处理模块，因为它在同一进程中运行。其他环境可以通过连接到 JS 运行时（如 workerd）或 Worker 线程（如 Vitest）来运行模块。
 
-<<<<<<< HEAD
-此功能的目标之一是提供一个可定制的 API 来处理和运行代码。用户可以使用暴露的基础组件创建新的环境工厂。
-=======
 ```dot
 digraph module_runner {
   rankdir=LR
@@ -131,8 +128,7 @@ digraph module_runner {
 }
 ```
 
-One of the goals of this feature is to provide a customizable API to process and run code. Users can create new environment factories using the exposed primitives.
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+此功能的目标之一是提供一个可定制的 API 来处理和运行代码。用户可以使用暴露的基础组件创建新的环境工厂。
 
 ```ts
 import { DevEnvironment, HotChannel } from 'vite'

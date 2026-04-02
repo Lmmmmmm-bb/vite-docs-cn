@@ -120,16 +120,10 @@ export default function myPlugin() {
   const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
-<<<<<<< HEAD
     name: 'my-plugin', // 必须的，将会在 warning 和 error 中显示
-    resolveId(id) {
-      if (id === virtualModuleId) {
-=======
-    name: 'my-plugin', // required, will show up in warnings and errors
     resolveId: {
       filter: { id: exactRegex(virtualModuleId) },
       handler() {
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
         return resolvedVirtualModuleId
       },
     },
@@ -483,18 +477,15 @@ Vite 插件也可以提供钩子来服务于特定的 Vite 目标。这些钩子
     }
     ```
 
-<<<<<<< HEAD
-## Output Bundle Metadata {#output-bundle-metadata}
-=======
-## Plugin Context Meta
+## 插件上下文 Meta {#plugin-context-meta}
 
-For plugin hooks that has access to the plugin context, Vite exposes additional properties on `this.meta`:
+对于可以访问插件上下文的插件钩子，Vite 会在 `this.meta` 上暴露额外的属性：
 
-- `this.meta.viteVersion`: The current Vite version string (e.g. `"8.0.0"`).
+- `this.meta.viteVersion`：当前 Vite 版本字符串（例如 `"8.0.0"`）。
 
-::: tip Detecting Rolldown powered Vite
+::: tip 检测基于 Rolldown 的 Vite
 
-[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) is only available for Rolldown powered Vite (i.e. Vite 8+). You can use it to detect whether the current Vite instance is powered by Rolldown:
+[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) 仅在基于 Rolldown 的 Vite（即 Vite 8+）中可用。你可以用它来检测当前 Vite 实例是否由 Rolldown 驱动：
 
 ```ts
 function versionCheckPlugin(): Plugin {
@@ -502,9 +493,9 @@ function versionCheckPlugin(): Plugin {
     name: 'version-check',
     buildStart() {
       if (this.meta.rolldownVersion) {
-        // only do something if running on a Rolldown powered Vite
+        // 仅在基于 Rolldown 的 Vite 上运行时才执行某些操作
       } else {
-        // do something else if running on a Rollup powered Vite
+        // 在基于 Rollup 的 Vite 上运行时执行其他操作
       }
     },
   }
@@ -513,8 +504,7 @@ function versionCheckPlugin(): Plugin {
 
 :::
 
-## Output Bundle Metadata
->>>>>>> 9a7e26b92cdfaca9b4e32fa082b7427c61c39d00
+## 构建输出元数据 {#output-bundle-metadata}
 
 在构建过程中，Vite 会向 Rolldown 的构建输出对象添加一个 Vite 特有的 `viteMetadata` 字段。
 

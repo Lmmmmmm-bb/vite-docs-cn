@@ -506,18 +506,14 @@ const config = defineConfig({
     // languages used for twoslash and jsdocs in twoslash
     languages: ['ts', 'js', 'json'],
     codeTransformers: [
-<<<<<<< HEAD
-      transformerTwoslash() as any,
-=======
       transformerTwoslash({
         twoslashOptions: {
           compilerOptions: {
             moduleResolution: 100, // bundler
-            ignoreDeprecations: '6.0', // remove the options entirely when twoslash doesn't set `baseUrl`
+            // ignoreDeprecations: '6.0', // remove the options entirely when twoslash doesn't set `baseUrl`
           },
         },
       }),
->>>>>>> 9e257b30b6877c84054d9662276098cc572540b3
       // add `style:*` support
       {
         root(hast) {

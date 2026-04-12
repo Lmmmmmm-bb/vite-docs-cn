@@ -16,20 +16,7 @@
 
 在某些情况下，可能响应的是其他服务器而不是 Vite。
 
-第一种情况是 `localhost` 被使用了。Node.js 在 v17 以下版本中默认会对 DNS 解析地址的结果进行重新排序。当访问 `localhost` 时，浏览器使用 DNS 来解析地址，这个地址可能与 Vite 正在监听的地址不同。当地址不一致时，Vite 会打印出来。
-
-你可以设置 [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) 来禁用这个重新排序的行为。Vite 会将地址打印为 `localhost`。
-
-```js twoslash [vite.config.js]
-import { defineConfig } from 'vite'
-import dns from 'node:dns'
-
-dns.setDefaultResultOrder('verbatim')
-
-export default defineConfig({
-  // omit
-})
-```
+第一种情况是使用 `localhost` 时。Node.js 的 [`dns.setDefaultResultOrder`](https://nodejs.org/docs/latest-v24.x/api/dns.html#dnssetdefaultresultorderorder) 会改变 DNS 解析结果的地址排序方式，而浏览器可能会使用与 Vite 正在监听的地址不同的解析地址。Vite 会在两者不一致时打印出解析后的地址。
 
 第二种情况是使用了通配主机地址（例如 `0.0.0.0`）。这是因为侦听非通配符主机的服务器优先于侦听通配符主机的服务器。
 
@@ -416,6 +403,12 @@ export default defineConfig({
 ::: tip NOTE
 
 此黑名单不适用于[公共目录](/guide/assets.md#the-public-directory)。公共目录中的所有文件均未经任何过滤，因为它们会在构建过程中直接复制到输出目录。
+
+:::
+
+::: tip NOTE
+
+拒绝过滤器会同时作用于模块 id，以及移除查询参数后的 id。由于插件可以在它的 `load` 钩子中读取任意文件（包括解析指向被拒绝路径的符号链接），Vite 无法保证被拒绝的文件不会通过其他路径访问到。如果你存在其他可替代路径，也应将其一并加入拒绝列表。
 
 :::
 

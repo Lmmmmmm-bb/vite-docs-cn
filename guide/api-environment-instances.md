@@ -84,6 +84,18 @@ class DevEnvironment {
    * 已经处理完毕。
    */
   async warmupRequest(url: string): Promise<void>
+
+  /**
+   * Called by the module runner to retrieve information about the specified
+   * module. Internally calls `transformRequest` and wraps the result in the
+   * format that the module runner understands.
+   * This method is not meant to be called manually.
+   */
+  async fetchModule(
+    id: string,
+    importer?: string,
+    options?: FetchFunctionOptions,
+  ): Promise<FetchResult>
 }
 ```
 
@@ -207,5 +219,71 @@ export class EnvironmentModuleGraph {
   ): void
 
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined
+}
+```
+
+## `FetchResult`
+
+`environment.fetchModule` 方法会返回一个供模块运行器使用的 `FetchResult`。`FetchResult` 是 `CachedFetchResult`、`ExternalFetchResult` 和 `ViteFetchResult` 的联合类型。
+
+`CachedFetchResult` 类似于 HTTP 状态码 `304`（Not Modified，未修改）。
+
+```ts
+export interface CachedFetchResult {
+  /**
+   * If the module is cached in the runner, this confirms
+   * it was not invalidated on the server side.
+   */
+  cache: true
+}
+```
+
+`ExternalFetchResult` 会指示模块运行器通过 [`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator) 上的 `runExternalModule` 方法导入该模块。在这种情况下，默认的模块求值器会使用运行时原生的 `import`，而不是通过 Vite 处理该文件。
+
+```ts
+export interface ExternalFetchResult {
+  /**
+   * The path to the externalized module starting with file://.
+   * By default this will be imported via a dynamic "import"
+   * instead of being transformed by Vite and loaded with the Vite runner.
+   */
+  externalize: string
+  /**
+   * Type of the module. Used to determine if the import statement is correct.
+   * For example, if Vite needs to throw an error if a variable is not actually exported.
+   */
+  type: 'module' | 'commonjs' | 'builtin' | 'network'
+}
+```
+
+`ViteFetchResult` 会返回当前模块的信息，包括要执行的 `code`，以及模块的 `id`、`file` 和 `url`。
+
+`invalidate` 字段会指示模块运行器在再次执行该模块之前先使其失效，而不是直接从缓存中提供该模块。通常在触发 HMR 更新时，这个值会是 `true`。
+
+```ts
+export interface ViteFetchResult {
+  /**
+   * Code that will be evaluated by the Vite runner.
+   * By default this will be wrapped in an async function.
+   */
+  code: string
+  /**
+   * File path of the module on disk.
+   * This will be resolved as import.meta.url/filename.
+   * Will be `null` for virtual modules.
+   */
+  file: string | null
+  /**
+   * Module ID in the server module graph.
+   */
+  id: string
+  /**
+   * Module URL used in the import.
+   */
+  url: string
+  /**
+   * Invalidate module on the client side.
+   */
+  invalidate: boolean
 }
 ```

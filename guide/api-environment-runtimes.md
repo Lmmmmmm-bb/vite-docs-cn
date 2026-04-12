@@ -156,13 +156,9 @@ function createWorkerdDevEnvironment(
 }
 ```
 
-<<<<<<< HEAD
-[`DevEnvironment` 具有多个通信级别](/guide/api-environment-frameworks#devenvironment-communication-levels)。为了便于框架编写与运行时无关的代码，我们建议实现尽可能灵活的通信级别。
-=======
-By default, `HotChannel` transports have `server.fs` restrictions applied, meaning only files within the allowed directories can be served. If your transport is not exposed over the network (e.g., it communicates via worker threads or in-process calls), you can set `skipFsCheck: true` on the `HotChannel` to bypass these restrictions.
+默认情况下，`HotChannel` 传输会受到 `server.fs` 限制，这意味着只有位于允许目录内的文件才能被提供。如果你的传输并未暴露到网络上（例如通过 worker 线程或进程内调用进行通信），你可以在 `HotChannel` 上设置 `skipFsCheck: true` 来绕过这些限制。
 
-There are [multiple communication levels for the `DevEnvironment`](/guide/api-environment-frameworks#devenvironment-communication-levels). To make it easier for frameworks to write runtime agnostic code, we recommend to implement the most flexible communication level possible.
->>>>>>> a949b04e02d92544bd4c084a0c18d9823cfa0250
+[`DevEnvironment` 具有多个通信级别](/guide/api-environment-frameworks#devenvironment-communication-levels)。为了便于框架编写与运行时无关的代码，我们建议实现尽可能灵活的通信级别。
 
 ## `ModuleRunner`
 

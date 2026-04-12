@@ -224,9 +224,9 @@ export class EnvironmentModuleGraph {
 
 ## `FetchResult`
 
-The `environment.fetchModule` method returns a `FetchResult` that is meant to be consumed by the module runner. `FetchResult` is a union of `CachedFetchResult`, `ExternalFetchResult`, and `ViteFetchResult`.
+`environment.fetchModule` 方法会返回一个供模块运行器使用的 `FetchResult`。`FetchResult` 是 `CachedFetchResult`、`ExternalFetchResult` 和 `ViteFetchResult` 的联合类型。
 
-`CachedFetchResult` is analogous to the `304` (Not Modified) HTTP status code.
+`CachedFetchResult` 类似于 HTTP 状态码 `304`（Not Modified，未修改）。
 
 ```ts
 export interface CachedFetchResult {

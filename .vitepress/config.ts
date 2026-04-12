@@ -133,7 +133,6 @@ const config = defineConfig({
     search: {
       provider: 'local',
       options: {
-<<<<<<< HEAD
         translations: {
           button: {
             buttonText: '搜索',
@@ -148,19 +147,6 @@ const config = defineConfig({
           }
         }
       }
-=======
-        miniSearch: {
-          searchOptions: {
-            boostDocument(page) {
-              if (page.startsWith('/guide/')) return 2 // Prefer guide pages
-              if (page.startsWith('/config/')) return 1.5 // Then config pages
-              if (page.startsWith('/blog/')) return 0 // Do not index blog posts
-              return 1
-            },
-          },
-        },
-      },
->>>>>>> a949b04e02d92544bd4c084a0c18d9823cfa0250
     },
 
     docFooter: {

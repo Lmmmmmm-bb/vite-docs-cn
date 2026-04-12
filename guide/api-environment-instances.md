@@ -238,7 +238,7 @@ export interface CachedFetchResult {
 }
 ```
 
-`ExternalFetchResult` instructs the module runner to import the module using the `runExternalModule` method on the [`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator). In this case, the default module evaluator will use the runtime's native `import` instead of processing the file through Vite.
+`ExternalFetchResult` 会指示模块运行器通过 [`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator) 上的 `runExternalModule` 方法导入该模块。在这种情况下，默认的模块求值器会使用运行时原生的 `import`，而不是通过 Vite 处理该文件。
 
 ```ts
 export interface ExternalFetchResult {
@@ -256,9 +256,9 @@ export interface ExternalFetchResult {
 }
 ```
 
-`ViteFetchResult` returns information about the current module, including the `code` to execute and the module's `id`, `file`, and `url`.
+`ViteFetchResult` 会返回当前模块的信息，包括要执行的 `code`，以及模块的 `id`、`file` 和 `url`。
 
-The `invalidate` field instructs the module runner to invalidate the module before executing it again rather than serving it from cache. This is usually `true` when an HMR update was triggered.
+`invalidate` 字段会指示模块运行器在再次执行该模块之前先使其失效，而不是直接从缓存中提供该模块。通常在触发 HMR 更新时，这个值会是 `true`。
 
 ```ts
 export interface ViteFetchResult {

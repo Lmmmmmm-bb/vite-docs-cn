@@ -9,19 +9,7 @@ import { computed } from 'vue'
 import { useSponsor, voidZero } from './.vitepress/theme/composables/sponsor'
 import VPSponsors from '@components/vitepress-default/VPSponsors.vue'
 
-const { data: sponsorData } = useSponsor()
-
-const allSponsors = computed(() => {
-  if (!sponsorData.value) return []
-  return [
-    {
-      tier: 'Brought to you by',
-      size: 'big',
-      items: [voidZero],
-    },
-    ...sponsorData.value,
-  ]
-})
+const sponsors = useSponsor()
 
 function npmUrl(name) {
   return `https://www.npmjs.com/package/${name}`
@@ -43,7 +31,7 @@ Vite 是由来自世界各地的开发者共同打造的。想了解核心团队
 Vite 的持续发展离不开众多赞助商的大力支持。如果你也想支持 Vite，可以通过 [GitHub Sponsors](https://github.com/sponsors/vitejs) 或 [Open Collective](https://opencollective.com/vite) 来贡献一份力量。
 
 <div class="sponsors-container">
-  <VPSponsors :data="allSponsors" />
+  <VPSponsors :data="sponsors ?? []" />
 </div>
 
 <!--

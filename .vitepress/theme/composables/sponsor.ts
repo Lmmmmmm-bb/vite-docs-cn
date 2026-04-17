@@ -42,49 +42,5 @@ export function useSponsor() {
     ]
   })
 
-<<<<<<< HEAD
-  return {
-    data,
-  }
-}
-
-function mapSponsors(sponsors: Sponsors): SponsorTier[] {
-  return [
-    {
-      tier: '合作伙伴',
-      size: 'big' as const,
-      items: viteSponsors['special'],
-    },
-    {
-      tier: '铂金赞助商',
-      size: 'big' as const,
-      items: mapImgPath(sponsors['platinum']),
-    },
-    {
-      tier: '黄金赞助商',
-      size: 'medium' as const,
-      items: [...mapImgPath(sponsors['gold']), ...viteSponsors['gold']],
-    },
-  ]
-}
-
-const viteSponsorNames = new Set(
-  Object.values(viteSponsors).flatMap((sponsors) =>
-    sponsors.map((s) => s.name),
-  ),
-)
-
-/**
- * Map Vue/Vite sponsors data to objects and filter out Vite-specific sponsors
- */
-function mapImgPath(sponsors: Sponsor[]) {
-  return sponsors
-    .filter((sponsor) => !viteSponsorNames.has(sponsor.name))
-    .map((sponsor) => ({
-      ...sponsor,
-      img: `${dataHost}/images/${sponsor.img}`,
-    }))
-=======
   return data
->>>>>>> fbe217f4529e6842458d880526718899a961bd96
 }

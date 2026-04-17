@@ -5,13 +5,8 @@ description: Vite is built upon the shoulders of giants. Thank you to all the pr
 
 <script setup>
 import { computed } from 'vue'
-<<<<<<< HEAD
 // import { data } from './_data/acknowledgements.data'
 import { useSponsor, voidZero } from './.vitepress/theme/composables/sponsor'
-=======
-import { data } from './_data/acknowledgements.data'
-import { useSponsor } from './.vitepress/theme/composables/sponsor'
->>>>>>> fbe217f4529e6842458d880526718899a961bd96
 import VPSponsors from '@components/vitepress-default/VPSponsors.vue'
 
 const sponsors = useSponsor()

@@ -363,21 +363,13 @@ const plugin = {
 - Rolldown 缺少支持：以下功能不受 Rolldown 支持，Vite 也不再支持这些功能。
   - `build.rollupOptions.output.format: 'system'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2387))
   - `build.rollupOptions.output.format: 'amd'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2528))
-<<<<<<< HEAD
   - `shouldTransformCachedModule` 钩子 ([rolldown#4389](https://github.com/rolldown/rolldown/issues/4389))
   - `resolveImportMeta` 钩子 ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
   - `renderDynamicImport` 钩子 ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - `resolveFileUrl` 钩子
 - `parseAst` / `parseAstAsync` 函数现在已被弃用，推荐使用功能更多的 `parseSync` / `parse` 函数。
-=======
-  - `shouldTransformCachedModule` hook ([rolldown#4389](https://github.com/rolldown/rolldown/issues/4389))
-  - `resolveImportMeta` hook ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
-  - `renderDynamicImport` hook ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
-  - `resolveFileUrl` hook
-- `parseAst` / `parseAstAsync` functions are now deprecated in favor of `parseSync` / `parse` functions which have more features.
-- comments are removed before the `renderChunk` hook instead of after the `renderChunk` hook
-- comments other than the ones listed [here](https://rolldown.rs/reference/OutputOptions.comments) are moved, while Rollup only removes comments if the adjacent code is removed
->>>>>>> 3a5e0c3d0bf9838fb32e75017844be8f13c3b2f5
+- 注释会在 `renderChunk` 钩子之前被移除，而不是之后
+- [此处](https://rolldown.rs/reference/OutputOptions.comments) 列出之外的注释都会被移除，而 Rollup 只会在相邻代码被移除时才删除注释
 
 ## 从 v6 迁移 {#migration-from-v6}
 

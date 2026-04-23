@@ -1,4 +1,4 @@
-<script setup lang="ts">
+ <h2 class="text-white">40m+</h2><script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
 interface Testimonial {
@@ -114,13 +114,8 @@ const testimonials: Testimonial[] = [
 
         <!-- NPM Downloads -->
         <div class="flex flex-col gap-3">
-<<<<<<< HEAD
-          <h2 class="text-white">40m+</h2>
-          <p class="text-grey">每周 NPM 下载量</p>
-=======
           <h2 class="text-white">80m+</h2>
-          <p class="text-grey">Weekly NPM downloads</p>
->>>>>>> 3a5e0c3d0bf9838fb32e75017844be8f13c3b2f5
+          <p class="text-grey">每周 NPM 下载量</p>
         </div>
       </div>
     </div>

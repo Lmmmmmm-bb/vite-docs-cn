@@ -1,4 +1,4 @@
- <h2 class="text-white">40m+</h2><script setup lang="ts">
+<script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
 interface Testimonial {
